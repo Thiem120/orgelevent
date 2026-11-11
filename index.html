@@ -161,11 +161,11 @@
       z-index: 1;
       background:
         linear-gradient(to bottom,
-          rgba(14,24,22,0.52) 0%,
-          rgba(14,24,22,0.0) 22%,
-          rgba(14,24,22,0.0) 48%,
-          rgba(14,24,22,0.72) 74%,
-          rgba(14,24,22,0.94) 100%
+          rgba(14,24,22,0.70) 0%,
+          rgba(14,24,22,0.15) 25%,
+          rgba(14,24,22,0.20) 45%,
+          rgba(14,24,22,0.86) 72%,
+          rgba(14,24,22,0.97) 100%
         );
     }
 
@@ -688,52 +688,175 @@
     }
 
     /* =============================================================
-       KORAALBOEK
+       TICKETS
     ============================================================= */
-    .section-koraalboek {
+    .section-tickets {
       background: var(--bg-alt);
-      padding: 80px 0;
+      padding: 100px 0;
       border-top: 1px solid var(--rule);
     }
 
-    .kb-rij {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-      flex-wrap: wrap;
+    .tickets-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
     }
 
-    .kb-tekst-blok {
-      flex: 1;
-      min-width: 280px;
+    .tickets-info .section-heading {
+      margin-bottom: 12px;
     }
 
-    .kb-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-subtle);
-      margin-bottom: 10px;
-    }
-
-    .kb-naam {
-      font-family: var(--f-display);
-      font-size: 32px;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--ink);
-      margin-bottom: 10px;
-      line-height: 1.1;
-    }
-
-    .kb-desc {
+    .tickets-lead {
       font-size: 15px;
       font-weight: 300;
       color: var(--ink-muted);
-      max-width: 440px;
       line-height: 1.65;
+      margin-bottom: 48px;
+    }
+
+    .ticket-types {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 44px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .ticket-type {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .ticket-type-naam {
+      font-family: var(--f-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+
+    .ticket-type-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-muted);
+    }
+
+    .ticket-type-prijs {
+      font-family: var(--f-display);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--teal);
+      white-space: nowrap;
+    }
+
+    .organizer-line {
+      font-size: 13px;
+      color: var(--ink-subtle);
+    }
+
+    .organizer-line a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Formulier */
+    .ticket-form-wrap {
+      background: #fff;
+      border: 1px solid var(--rule);
+      padding: 44px 48px;
+    }
+
+    .form-title {
+      font-family: var(--f-display);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 32px;
+      line-height: 1.1;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-subtle);
+      margin-bottom: 7px;
+    }
+
+    .form-row input,
+    .form-row select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 1px;
+      font-family: var(--f-body);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink);
+      padding: 11px 14px;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus {
+      border-color: var(--teal);
+    }
+
+    .form-row select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9A8E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-row-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      font-family: var(--f-body);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 16px 24px;
+      border-radius: 1px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--teal-dark);
+    }
+
+    .form-note {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--ink-subtle);
+      margin-top: 14px;
+      text-align: center;
+      line-height: 1.5;
     }
 
     .btn-outline {
@@ -893,8 +1016,17 @@
       .section-programma,
       .section-standhouders,
       .section-praktisch,
-      .section-koraalboek {
+      .section-tickets {
         padding: 72px 0;
+      }
+
+      .tickets-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .ticket-form-wrap {
+        padding: 32px 28px;
       }
 
       .section-musici {
@@ -1206,16 +1338,79 @@
     </div>
   </section>
 
-  <!-- AANMELDEN / KORAALBOEK -->
-  <section id="aanmelden" class="section-koraalboek">
+  <!-- TICKETS -->
+  <section id="aanmelden" class="section-tickets">
     <div class="container">
-      <div class="kb-rij">
-        <div class="kb-tekst-blok">
-          <div class="kb-label">Organisator</div>
-          <h2 class="kb-naam">KoraalBoek.nl</h2>
-          <p class="kb-desc">OrgelEvent wordt georganiseerd door het team van KoraalBoek.nl &mdash; platform voor orgelbladmuziek. Aanmelden voor het evenement is mogelijk via de website van KoraalBoek.nl.</p>
+      <div class="tickets-layout">
+
+        <!-- Links: info + prijzen -->
+        <div class="tickets-info">
+          <div class="fact-label" style="color:var(--ink-subtle);margin-bottom:12px;">Tickets</div>
+          <h2 class="section-heading">Meld je aan</h2>
+          <p class="tickets-lead">Bestel je tickets voor OrgelEvent 2027. Je ontvangt direct een bevestiging per e-mail. Organisatie: KoraalBoek.nl.</p>
+
+          <div class="ticket-types">
+            <div class="ticket-type">
+              <div>
+                <div class="ticket-type-naam">Dagticket</div>
+                <div class="ticket-type-desc">Toegang tot alle lezingen, stands en het slotconcert</div>
+              </div>
+              <div class="ticket-type-prijs">&euro;&thinsp;12,50</div>
+            </div>
+            <div class="ticket-type">
+              <div>
+                <div class="ticket-type-naam">Slotconcert</div>
+                <div class="ticket-type-desc">Alleen het slotconcert van Gert van Hoef &mdash; 19:00</div>
+              </div>
+              <div class="ticket-type-prijs">&euro;&thinsp;7,50</div>
+            </div>
+          </div>
+
+          <p class="organizer-line">Georganiseerd door <a href="https://koraalboek.nl" target="_blank" rel="noopener">KoraalBoek.nl</a></p>
         </div>
-        <a href="https://koraalboek.nl" class="btn-outline" target="_blank" rel="noopener">Bezoek KoraalBoek.nl &rarr;</a>
+
+        <!-- Rechts: formulier -->
+        <div class="ticket-form-wrap">
+          <div class="form-title">Bestel tickets</div>
+          <form action="https://koraalboek.nl/orgelevent/aanmelden" method="POST">
+            <div class="form-row-split">
+              <div class="form-row">
+                <label for="voornaam">Voornaam</label>
+                <input type="text" id="voornaam" name="voornaam" placeholder="Jan" required />
+              </div>
+              <div class="form-row">
+                <label for="achternaam">Achternaam</label>
+                <input type="text" id="achternaam" name="achternaam" placeholder="de Vries" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="email">E-mailadres</label>
+              <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required />
+            </div>
+            <div class="form-row-split">
+              <div class="form-row">
+                <label for="ticket_type">Type ticket</label>
+                <select id="ticket_type" name="ticket_type">
+                  <option value="dag">Dagticket &mdash; &euro; 12,50</option>
+                  <option value="concert">Slotconcert &mdash; &euro; 7,50</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="aantal">Aantal</label>
+                <select id="aantal" name="aantal">
+                  <option value="1">1 persoon</option>
+                  <option value="2">2 personen</option>
+                  <option value="3">3 personen</option>
+                  <option value="4">4 personen</option>
+                  <option value="5">5 personen</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit">Bestel tickets &rarr;</button>
+            <p class="form-note">Je wordt doorgestuurd naar KoraalBoek.nl voor veilige betaling via iDEAL of creditcard.</p>
+          </form>
+        </div>
+
       </div>
     </div>
   </section>
