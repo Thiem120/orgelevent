@@ -18,26 +18,21 @@
        DESIGN TOKENS
     ============================================================= */
     :root {
-      /* Background */
       --bg:          #F8F6F2;
       --bg-alt:      #F0EDE6;
       --bg-dark:     #182D2B;
 
-      /* Text */
       --ink:         #17170E;
       --ink-muted:   #585850;
       --ink-subtle:  #9A9A8E;
 
-      /* Borders */
       --rule:        #DDD9D0;
 
-      /* Brand */
       --teal:        #1C5450;
       --teal-dark:   #122E2C;
       --coral:       #E4694A;
       --yellow:      #FDD34F;
 
-      /* Typography */
       --f-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
       --f-body:    'Jost', 'Helvetica Neue', system-ui, sans-serif;
     }
@@ -80,7 +75,7 @@
       inset: 0 0 auto 0;
       z-index: 200;
       background: rgba(248,246,242,0.96);
-      border-bottom: 1px solid var(--rule);
+      border-bottom: 1px solid rgba(221,217,208,0.6);
     }
 
     .header-inner {
@@ -140,48 +135,61 @@
     }
 
     /* =============================================================
-       HERO — gespleten layout
+       HERO — full-bleed kerkfoto
     ============================================================= */
     .hero {
-      display: grid;
-      grid-template-columns: 44fr 56fr;
-      min-height: 100vh;
-      padding-top: 60px;
-    }
-
-    .hero-photo {
       position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       overflow: hidden;
     }
 
-    .hero-photo img {
+    /* Achtergrond-foto via CSS voor objectfit + position controle */
+    .hero-bg {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
+      background: url('./assets/kerk.jpg') center 20% / cover no-repeat;
+      z-index: 0;
     }
 
-    .hero-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 72px 80px 64px;
+    /* Dubbele gradient: donker bovenaan (voor header leesbaarheid) + donker onderaan (voor tekst) */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to bottom,
+          rgba(14,24,22,0.52) 0%,
+          rgba(14,24,22,0.0) 22%,
+          rgba(14,24,22,0.0) 48%,
+          rgba(14,24,22,0.72) 74%,
+          rgba(14,24,22,0.94) 100%
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 48px 88px;
     }
 
     .hero-kicker {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 44px;
+      margin-bottom: 36px;
     }
 
     .hero-kicker-line {
       flex-shrink: 0;
       width: 28px;
       height: 1px;
-      background: var(--teal);
+      background: rgba(255,255,255,0.45);
     }
 
     .hero-kicker-text {
@@ -189,16 +197,16 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: rgba(255,255,255,0.65);
     }
 
     .hero-title {
       font-family: var(--f-display);
-      font-size: clamp(68px, 7vw, 104px);
-      line-height: 0.9;
+      font-size: clamp(80px, 9vw, 132px);
+      line-height: 0.88;
       letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 36px;
+      color: #fff;
+      margin-bottom: 32px;
     }
 
     .hero-title em {
@@ -216,10 +224,10 @@
     .hero-desc {
       font-size: 17px;
       font-weight: 300;
-      color: var(--ink-muted);
+      color: rgba(255,255,255,0.72);
       line-height: 1.65;
-      max-width: 400px;
-      margin-bottom: 52px;
+      max-width: 420px;
+      margin-bottom: 48px;
     }
 
     .hero-action-row {
@@ -249,7 +257,7 @@
     .hero-location {
       font-size: 12px;
       font-weight: 400;
-      color: var(--ink-subtle);
+      color: rgba(255,255,255,0.4);
       letter-spacing: 0.03em;
     }
 
@@ -270,10 +278,8 @@
 
     .fact-cell {
       flex: 1;
-      padding: 20px 0;
+      padding: 20px 32px;
       border-right: 1px solid rgba(255,255,255,0.12);
-      padding-right: 32px;
-      padding-left: 32px;
     }
 
     .fact-cell:first-child {
@@ -353,7 +359,6 @@
       padding-bottom: 0;
     }
 
-    /* Stip op de tijdlijn */
     .tl-entry::before {
       content: '';
       position: absolute;
@@ -441,7 +446,6 @@
       line-height: 1.65;
     }
 
-    /* Slotconcert horizontale lijn */
     .tl-entry.finale {
       padding-top: 44px;
       margin-top: 20px;
@@ -458,11 +462,11 @@
     }
 
     /* =============================================================
-       MUSICI — donkere sectie, orgelpijp-compositie
+       MUSICI — full-width fotorij, orgelpijp-effect via kolombreedtes
     ============================================================= */
     .section-musici {
       background: var(--bg-dark);
-      padding: 100px 0;
+      padding: 80px 0 0;
     }
 
     .musici-heading {
@@ -481,14 +485,14 @@
       color: rgba(255,255,255,0.5);
       max-width: 440px;
       line-height: 1.65;
-      margin-bottom: 72px;
+      margin-bottom: 64px;
     }
 
-    /* Drie "orgelpijpen": variabele hoogte */
+    /* Fotorij: geen gap, breedte bepaalt hoogte (orgelpijp-effect) */
     .musici-triptych {
       display: grid;
-      grid-template-columns: 5fr 3.4fr 3.4fr;
-      gap: 40px;
+      grid-template-columns: 5fr 3fr 3fr;
+      gap: 0;
       align-items: start;
     }
 
@@ -499,21 +503,18 @@
 
     .musicus-photo {
       width: 100%;
+      aspect-ratio: 3 / 4;
       object-fit: cover;
       object-position: center top;
       display: block;
-      margin-bottom: 22px;
     }
 
-    /* Primaire musicus: langste "pijp" */
-    .musicus-item--primary .musicus-photo {
-      aspect-ratio: 3 / 4;
-    }
-
-    /* Secundaire: iets korter */
     .musicus-item:not(.musicus-item--primary) .musicus-photo {
-      aspect-ratio: 4 / 5;
-      filter: brightness(0.95);
+      filter: brightness(0.88);
+    }
+
+    .musicus-info {
+      padding: 24px 32px 44px;
     }
 
     .musicus-name {
@@ -545,7 +546,7 @@
     .musicus-desc {
       font-size: 14px;
       font-weight: 300;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.52);
       line-height: 1.65;
     }
 
@@ -804,28 +805,16 @@
        RESPONSIEF — tablet
     ============================================================= */
     @media (max-width: 1024px) {
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
+      .hero-title {
+        font-size: clamp(72px, 9vw, 108px);
       }
 
-      .hero-photo {
-        height: 52vh;
-        min-height: 320px;
-        position: relative;
-      }
-
-      .hero-photo img {
-        position: absolute;
-      }
-
-      .hero-panel {
-        padding: 56px 48px 72px;
+      .hero-content {
+        padding: 0 40px 72px;
       }
 
       .musici-triptych {
         grid-template-columns: 1fr 1fr;
-        gap: 32px;
       }
 
       .musicus-item--primary {
@@ -834,7 +823,7 @@
 
       .musicus-item--primary .musicus-photo {
         aspect-ratio: 16 / 7;
-        object-position: center 25%;
+        object-position: center 30%;
       }
 
       .timeline {
@@ -867,12 +856,16 @@
         display: none;
       }
 
-      .hero-panel {
-        padding: 44px 24px 60px;
+      .hero-content {
+        padding: 0 24px 60px;
       }
 
       .hero-title {
-        font-size: 54px;
+        font-size: 58px;
+      }
+
+      .hero-desc {
+        font-size: 15px;
       }
 
       .facts-band-inner {
@@ -886,8 +879,6 @@
         border-right: none;
         border-bottom: 1px solid rgba(255,255,255,0.12);
         padding: 16px 0;
-        padding-right: 0;
-        padding-left: 0;
       }
 
       .fact-cell:nth-child(even) {
@@ -900,11 +891,14 @@
       }
 
       .section-programma,
-      .section-musici,
       .section-standhouders,
       .section-praktisch,
       .section-koraalboek {
         padding: 72px 0;
+      }
+
+      .section-musici {
+        padding: 72px 0 0;
       }
 
       /* Tijdlijn: vereenvoudigd op mobiel */
@@ -949,12 +943,16 @@
 
       .musici-triptych {
         grid-template-columns: 1fr;
-        gap: 44px;
       }
 
-      .musicus-item--primary .musicus-photo {
+      .musicus-item--primary .musicus-photo,
+      .musicus-item:not(.musicus-item--primary) .musicus-photo {
         aspect-ratio: 3 / 4;
         object-position: center top;
+      }
+
+      .musicus-info {
+        padding: 20px 24px 36px;
       }
 
       .standhouders-columns {
@@ -982,7 +980,7 @@
 
     @media (max-width: 480px) {
       .hero-title {
-        font-size: 46px;
+        font-size: 48px;
       }
     }
 
@@ -1015,12 +1013,11 @@
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO — full-bleed kerkfoto met gradient overlay -->
   <section class="hero" aria-label="Introductie">
-    <div class="hero-photo" aria-hidden="true">
-      <img src="./assets/kerk.jpg" alt="Interieur van de Grote of Sint-Janskerk, Schiedam" />
-    </div>
-    <div class="hero-panel">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
       <div class="hero-kicker" aria-hidden="true">
         <div class="hero-kicker-line"></div>
         <span class="hero-kicker-text">KoraalBoek.nl &mdash; 29 mei 2027</span>
@@ -1112,39 +1109,45 @@
     </div>
   </section>
 
-  <!-- MUSICI -->
+  <!-- MUSICI — full-width fotorij -->
   <section id="musici" class="section-musici">
     <div class="container">
       <h2 class="musici-heading">De musici</h2>
       <p class="musici-lead">Drie gerenommeerde organisten, elk met een eigen bijdrage aan het programma.</p>
+    </div>
 
-      <div class="musici-triptych">
+    <div class="musici-triptych">
 
-        <!-- Sietze — primair, langste "pijp" -->
-        <div class="musicus-item musicus-item--primary">
-          <img class="musicus-photo" src="./assets/sietze-de-vries.png" alt="Sietze de Vries" />
+      <!-- Sietze — primair: breedste kolom = langste foto -->
+      <div class="musicus-item musicus-item--primary">
+        <img class="musicus-photo" src="./assets/sietze-de-vries.png" alt="Sietze de Vries" />
+        <div class="musicus-info">
           <div class="musicus-name">Sietze de Vries</div>
           <div class="musicus-role">Lezing &amp; Concert</div>
           <p class="musicus-desc">Internationaal organist en improvisator. Bekend om zijn meeslepende optredens in binnen- en buitenland, waarbij vakmanschap en persoonlijkheid samenkomen.</p>
         </div>
+      </div>
 
-        <!-- Minne -->
-        <div class="musicus-item">
-          <img class="musicus-photo" src="./assets/minne-veldman.jpg" alt="Minne Veldman" />
+      <!-- Minne -->
+      <div class="musicus-item">
+        <img class="musicus-photo" src="./assets/minne-veldman.jpg" alt="Minne Veldman" />
+        <div class="musicus-info">
           <div class="musicus-name">Minne Veldman</div>
           <div class="musicus-role">Koraalboek Preview</div>
           <p class="musicus-desc">Componist en organist. Presenteert een exclusieve preview van zijn nieuwe koraalboek, speciaal voor dit evenement.</p>
         </div>
+      </div>
 
-        <!-- Gert -->
-        <div class="musicus-item">
-          <img class="musicus-photo" src="./assets/gert-van-hoef.webp" alt="Gert van Hoef" />
+      <!-- Gert -->
+      <div class="musicus-item">
+        <img class="musicus-photo" src="./assets/gert-van-hoef.webp" alt="Gert van Hoef" />
+        <div class="musicus-info">
           <div class="musicus-name">Gert van Hoef</div>
           <div class="musicus-role">Slotconcert &mdash; 19:00</div>
           <p class="musicus-desc">Veelgevraagd organist en concertgever. Sluit de dag feestelijk af in de Grote of Sint-Janskerk om 19:00 uur.</p>
         </div>
-
       </div>
+
     </div>
   </section>
 
