@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-11-12T09:38:46.141Z",
         "reason": "Remaining findings are hero overlay text (white on photo with dark gradient) — hook cannot compute photo-layer contrast; parchment/near-white pair is from transparent hero section inheriting page bg during static analysis. Genuine contrast issues (#4b4a3b, #1a1912, footer rgba) already fixed."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T09:45:58.440Z",
+        "reason": "All flagged borders are directional (border-bottom on ghost links, border-left on prog-schema-note). The only bordered side always has adequate inset; no text is enclosed in a cramped box."
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T09:46:03.696Z",
+        "reason": "Warm Parchment (#FDFAF4) and Nave Cream (#F4ECD6) are OrgelEvent's core palette, explicitly documented in DESIGN.md as borrowed from Dutch church interior materials (aged parchment, nave stone). Not a reflexive choice."
       }
     ]
   }
