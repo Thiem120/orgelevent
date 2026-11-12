@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="nl" data-type="service" data-radius="sharp" data-buttons="solid" data-tone="light" data-ready="1"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OrgelEvent — orgeldag in Schiedam, 29 mei 2027</title>
+  <meta name="description" content="Orgeldag in de Grote of Sint-Janskerk, Schiedam op zaterdag 29 mei 2027. Met Sietze de Vries, Minne Veldman en Gert van Hoef. Dagticket €12,50.">
+  <meta property="og:title" content="OrgelEvent — orgeldag in Schiedam">
+  <meta property="og:description" content="Orgeldag in de Grote of Sint-Janskerk, Schiedam op 29 mei 2027. Met Sietze de Vries, Minne Veldman en Gert van Hoef.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./share.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fdfaf4">
+  <!-- favicon: ring mark in --p-ink -->
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'&gt;&lt;path fill='%231a1912' fill-rule='evenodd' d='M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 5.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z'/&gt;&lt;/svg&gt;">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&amp;family=Hanken+Grotesk:wght@400..600&amp;display=swap" rel="stylesheet">
+  <!-- taste-skill kit -->
+  <link rel="stylesheet" href="./assets/system.css">
+  <link rel="stylesheet" href="./assets/ui/cards.css">
+  <link rel="stylesheet" href="./assets/motion/motion.css">
+  <link rel="stylesheet" href="./assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="./assets/layout/layout.css">
+  <style>
+    /* ---- brand tokens ---- */
+    :root {
+      --p-bg:            #fdfaf4;
+      --p-surface:       #f4ecd6;
+      --p-ink:           #1a1912;
+      --p-muted:         #666157;
+      --p-accent:        #1a5247;
+      --p-accent-ink:    #fdfaf4;
+      --p-action:        #1a5247;
+      --p-action-ink:    #fdfaf4;
+      --p-inv-bg:        #1a1912;
+      --p-inv-surface:   #27261f;
+      --p-inv-ink:       #fdfaf4;
+      --p-inv-muted:     #9e9c95;
+      --p-inv-accent:    #fdfaf4;
+      --p-inv-accent-ink:#1a1912;
+      --p-inv-action:    #fdfaf4;
+      --p-inv-action-ink:#1a1912;
+      --font-display:    "Newsreader", Georgia, serif;
+      --font-text:       "Hanken Grotesk", system-ui, sans-serif;
+      --display-weight:  400;
+      --display-tracking:-0.018em;
+      --display-tracking-xl:-0.025em;
+      --ly-scale:        1.06;
+      --gold:            #a87328;
+    }
+
+    /* ground-surface: one parchment section in the page rhythm */
+    .ground-surface {
+      background: var(--surface);
+    }
+
+    /* programme rows */
+    .prog-rijen { border-top: 1px solid var(--line); }
+    .prog-rij {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0 var(--s-6);
+      padding: var(--s-5) 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .prog-tijd { display: flex; flex-direction: column; gap: var(--s-1); padding-top: 2px; }
+    .prog-dagdeel { font-size: var(--t-label); font-weight: 500; color: var(--muted); }
+    .prog-uur {
+      font: var(--display-weight) var(--t-h3)/1.1 var(--font-display);
+      color: var(--ink);
+      letter-spacing: var(--display-tracking);
+    }
+    .prog-inhoud { display: grid; gap: var(--s-2); }
+    .prog-titel { font-size: var(--t-body); font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .prog-musicus { font-size: var(--t-small); font-weight: 500; color: var(--accent); }
+    .prog-tekst { font-size: var(--t-body); line-height: 1.65; color: var(--muted); max-width: 60ch; }
+    .prog-rij.finale .prog-uur { color: var(--gold); }
+    .prog-schema-note {
+      font-size: var(--t-small);
+      color: var(--muted);
+      margin-top: var(--s-5);
+      border-left: 2px solid var(--line-strong);
+      padding-left: var(--s-4);
+      line-height: 1.6;
+    }
+    @media (max-width: 639px) {
+      .prog-rij { grid-template-columns: 1fr; gap: var(--s-3); }
+      .prog-schema-note { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: var(--s-4); }
+    }
+
+    /* musici tiles */
+    .tile--musicus {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-3);
+    }
+    .tile--musicus .tile__foto {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: 50% 20%;
+      border-radius: var(--r-lg);
+    }
+    .tile--musicus .tile__naam {
+      font: var(--display-weight) var(--t-h3)/1.1 var(--font-display);
+      letter-spacing: var(--display-tracking);
+      color: var(--ink);
+      margin-top: var(--s-2);
+    }
+    .tile--musicus .tile__rol {
+      font-size: var(--t-small);
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .tile--musicus .tile__tekst {
+      font-size: var(--t-body);
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 44ch;
+    }
+
+    /* standhouders */
+    .standhouders-rij {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--line);
+      margin-top: var(--s-5);
+    }
+    .standhouder-item {
+      display: grid;
+      gap: var(--s-1);
+      padding: var(--s-4) var(--s-3) var(--s-4) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .standhouder-naam { font-size: var(--t-body); font-weight: 500; color: var(--ink); }
+    .standhouder-type { font-size: var(--t-small); color: var(--muted); }
+    @media (min-width: 1024px) {
+      .standhouders-rij { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 639px) {
+      .standhouders-rij { grid-template-columns: 1fr; }
+    }
+
+    /* ticket prices */
+    .ticket-lijst { border-top: 1px solid var(--line); }
+    .ticket-soort {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--s-5);
+      padding: var(--s-5) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .ticket-naam { font-size: var(--t-body); font-weight: 600; color: var(--ink); margin-bottom: var(--s-1); }
+    .ticket-omschr { font-size: var(--t-small); color: var(--muted); line-height: 1.55; max-width: 36ch; }
+    .ticket-prijs {
+      font: var(--display-weight) clamp(24px, 2vw, 32px)/1 var(--font-display);
+      color: var(--gold);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ticket-info { font-size: var(--t-small); color: var(--muted); line-height: 1.6; margin-top: var(--s-5); }
+    .ticket-info a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* form fields */
+    .field { display: grid; gap: var(--s-1); }
+    .field label { font-size: var(--t-small); font-weight: 500; color: var(--ink); }
+    .field input,
+    .field select {
+      height: 48px;
+      padding: 0 var(--s-4);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-sm);
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 var(--t-body)/1 var(--font-text);
+      width: 100%;
+      transition: border-color 150ms ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field select:focus { outline: none; border-color: var(--action); }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666157' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+    @media (max-width: 639px) { .field-row { grid-template-columns: 1fr; } }
+
+    .form-stack { display: grid; gap: var(--s-4); }
+    .form-noot { font-size: var(--t-small); color: var(--muted); margin-top: var(--s-4); line-height: 1.55; }
+
+    /* info table */
+    .info-rijen { border-top: 1px solid var(--line); }
+    .info-rij {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 var(--s-5);
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .info-label { font-size: var(--t-small); font-weight: 500; color: var(--muted); padding-top: 3px; }
+    .info-waarde { font-size: var(--t-body); color: var(--ink); line-height: 1.4; }
+    .info-waarde small { display: block; font-size: var(--t-small); color: var(--muted); margin-top: var(--s-1); }
+
+    /* locatie block */
+    .locatie-blok {
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: var(--s-6);
+      margin-top: var(--s-5);
+      display: grid;
+      gap: var(--s-3);
+    }
+    .locatie-naam {
+      font: var(--display-weight) var(--t-h3)/1.1 var(--font-display);
+      color: var(--ink);
+      letter-spacing: var(--display-tracking);
+    }
+    .locatie-adres { font-size: var(--t-body); color: var(--muted); line-height: 1.6; }
+    .locatie-info { font-size: var(--t-small); color: var(--muted); line-height: 1.6; }
+
+    /* footer columns */
+    .footer__dir {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: var(--s-5) var(--s-8);
+      border-top: 1px solid color-mix(in oklab, var(--ink) 16%, transparent);
+      padding-top: var(--s-5);
+    }
+    .footer__logo-block { display: grid; gap: var(--s-2); }
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s-2) var(--s-6);
+    }
+    .footer__nav a {
+      font-size: var(--t-small);
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+    .footer__nav a:hover { color: var(--ink); }
+    .footer__legal {
+      flex: 0 0 100%;
+      font-size: var(--t-small);
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s-2) var(--s-5);
+    }
+    .footer__legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* hero visual image */
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 30%;
+      border-radius: var(--r-lg);
+    }
+
+    /* footer closing wrap flex column */
+    footer.closing > .wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    footer.closing > .wrap > .footer__dir { margin-top: auto; }
+
+    /* footer--dark */
+    .footer--dark {
+      background: var(--p-inv-bg);
+      color: var(--p-inv-ink);
+      --bg:          var(--p-inv-bg);
+      --surface:     var(--p-inv-surface);
+      --ink:         var(--p-inv-ink);
+      --muted:       var(--p-inv-muted);
+      --accent:      var(--p-inv-accent);
+      --action:      var(--p-inv-action);
+      --action-ink:  var(--p-inv-action-ink);
+      --line:        rgba(255,255,255,0.10);
+      --line-strong: rgba(255,255,255,0.20);
+    }
+    .footer--dark .layer {
+      filter: brightness(0.25);
+    }
+    .footer--dark .nav__logo {
+      color: var(--p-inv-ink);
+    }
+    .footer--dark .mark {
+      background: var(--p-inv-ink);
+    }
+    .footer--dark .btn--primary {
+      background: var(--p-inv-action);
+      color: var(--p-inv-action-ink);
+    }
+    .footer--dark .btn--primary:hover {
+      background: color-mix(in oklab, var(--p-inv-action) 88%, var(--p-inv-bg));
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="nav">
+  <div class="wrap">
+    <div class="nav__bar">
+      <a class="skip-link" href="#top">Ga naar inhoud</a>
+      <a class="nav__logo" href="#">
+        <span class="mark" data-mark="ring" aria-hidden="true"></span>
+        OrgelEvent
+      </a>
+      <ul class="nav__links" role="list">
+        <li class="nav__item">
+          <a class="nav__link" href="#programma">Programma</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="#musici">Musici</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="#standhouders">Standhouders</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="#praktisch">Praktisch</a>
+        </li>
+      </ul>
+      <div class="nav__actions">
+        <a class="btn btn--primary" href="#aanmelden">Bestel tickets</a>
+      </div>
+      <button class="nav__toggle" aria-label="Menu openen" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================================================
+       HERO — split: tekst links, kerkfoto rechts
+  ============================================================ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-text hero-split grid">
+
+        <div class="hero-copy span-5">
+          <p class="hero-notice">Zaterdag 29 mei 2027, Schiedam</p>
+          <h1>OrgelEvent —<br>orgeldag in<br>Schiedam</h1>
+          <p>Een dag orgelmuziek, lezingen, stands en ontmoetingen in de Grote of Sint-Janskerk op zaterdag 29 mei 2027.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="#aanmelden">Bestel tickets</a>
+            <a class="btn btn--secondary" href="#programma">Bekijk het programma</a>
+          </div>
+          <dl class="hero-facts">
+            <div>
+              <dt>Datum</dt>
+              <dd>29 mei 2027</dd>
+            </div>
+            <div>
+              <dt>Locatie</dt>
+              <dd>Grote of Sint-Janskerk</dd>
+            </div>
+            <div>
+              <dt>Dagticket</dt>
+              <dd>€ 12,50</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-visual span-6 start-7">
+          <img src="./assets/kerk.jpg" alt="Interieur van de Grote of Sint-Janskerk, Schiedam">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROGRAMMA — 2 screens
+  ============================================================ -->
+  <section id="programma" class="section g2">
+    <div class="wrap">
+
+      <div class="group">
+        <div class="section-head">
+          <h2>Het programma</h2>
+          <p>Van ochtend tot avond — lezingen, optredens, vakstands en ontmoetingen in de Grote of Sint-Janskerk.</p>
+        </div>
+        <div class="fill">
+          <div class="prog-rijen">
+            <div class="prog-rij">
+              <div class="prog-tijd">
+                <div class="prog-dagdeel">Dag</div>
+                <div class="prog-uur">Overdag</div>
+              </div>
+              <div class="prog-inhoud">
+                <div class="prog-titel">Presentaties, stands &amp; mini-concerten</div>
+                <div class="prog-musicus">Alle standhouders</div>
+                <p class="prog-tekst">Verken de stands van orgelhuizen, uitgevers en vakspecialisten. Raak in gesprek, luister naar mini-concerten en bekijk de nieuwste instrumenten en bladmuziek.</p>
+              </div>
+            </div>
+            <div class="prog-rij">
+              <div class="prog-tijd">
+                <div class="prog-dagdeel">Lezing &amp; Concert</div>
+                <div class="prog-uur">Middag</div>
+              </div>
+              <div class="prog-inhoud">
+                <div class="prog-titel">Lezing en concert</div>
+                <div class="prog-musicus">Sietze de Vries</div>
+                <p class="prog-tekst">Internationaal gerenommeerd organist en improvisator. Sietze neemt je mee in de wereld van het orgel — muzikaal en verhalend, toegankelijk voor iedereen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="fill">
+          <div class="prog-rijen">
+            <div class="prog-rij">
+              <div class="prog-tijd">
+                <div class="prog-dagdeel">Preview</div>
+                <div class="prog-uur">Middag</div>
+              </div>
+              <div class="prog-inhoud">
+                <div class="prog-titel">Preview nieuw koraalboek</div>
+                <div class="prog-musicus">Minne Veldman</div>
+                <p class="prog-tekst">Een exclusieve eerste blik op Minne Veldmans aankomende koraalboek. Speciaal voor dit evenement, de bladmuziek is daarna beschikbaar via KoraalBoek.nl.</p>
+              </div>
+            </div>
+            <div class="prog-rij finale">
+              <div class="prog-tijd">
+                <div class="prog-dagdeel">Avond</div>
+                <div class="prog-uur">19:00</div>
+              </div>
+              <div class="prog-inhoud">
+                <div class="prog-titel">Slotconcert</div>
+                <div class="prog-musicus">Gert van Hoef</div>
+                <p class="prog-tekst">Een feestelijk slotconcert in de Grote of Sint-Janskerk. Gert van Hoef sluit de dag af met een optreden dat de ruimte van het kerkgebouw ten volle benut. Aparte tickets beschikbaar.</p>
+              </div>
+            </div>
+          </div>
+          <p class="prog-schema-note">Het definitieve tijdschema per onderdeel volgt. Houd de website in de gaten voor updates.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MUSICI — 1 screen
+  ============================================================ -->
+  <section id="musici" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Drie organisten, één dag</h2>
+        <p>Elk met een eigen optreden, elk met een eigen verhaal. Ontmoet de musici en beleef hun muziek van dichtbij.</p>
+      </div>
+      <div class="fill">
+        <div class="grid">
+          <div class="tile--musicus span-4">
+            <img class="tile__foto" src="./assets/sietze-de-vries.png" alt="Sietze de Vries">
+            <div class="tile__naam">Sietze de Vries</div>
+            <div class="tile__rol">Lezing &amp; Concert</div>
+            <p class="tile__tekst">Internationaal organist en improvisator. Bekend om zijn meeslepende optredens in binnen- en buitenland, waarbij vakmanschap en persoonlijkheid samenkomen.</p>
+          </div>
+          <div class="tile--musicus span-4">
+            <img class="tile__foto" src="./assets/minne-veldman.jpg" alt="Minne Veldman">
+            <div class="tile__naam">Minne Veldman</div>
+            <div class="tile__rol">Koraalboek Preview</div>
+            <p class="tile__tekst">Componist en organist. Minne presenteert een exclusieve preview van zijn nieuwe koraalboek. De bladmuziek is daarna beschikbaar via KoraalBoek.nl.</p>
+          </div>
+          <div class="tile--musicus span-4">
+            <img class="tile__foto" src="./assets/gert-van-hoef.webp" alt="Gert van Hoef">
+            <div class="tile__naam">Gert van Hoef</div>
+            <div class="tile__rol">Slotconcert, 19:00</div>
+            <p class="tile__tekst">Veelgevraagd organist en concertgever. Gert sluit de dag feestelijk af met een slotconcert in de Grote of Sint-Janskerk om 19:00 uur. Aparte tickets beschikbaar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STANDHOUDERS — 1 screen, ground-surface
+  ============================================================ -->
+  <section id="standhouders" class="section ground-surface">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Ontdek de standhouders</h2>
+        <p>Orgelhuizen, uitgevers, verenigingen en vakspecialisten zijn de hele dag aanwezig met stands, instrumenten en informatie. Neem de tijd om te ontdekken, praten en luisteren.</p>
+      </div>
+      <div class="fill">
+        <div class="standhouders-rij">
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Joh. de Heer en Content</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Noorlander en Sweelinq</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Stolk Orgels en Johannus</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Sonarte Orgels</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">OrgelConnect</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Martin Muziek en Sthenos Musica</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">De Orgelvriend</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Ver. Organisten Gereformeerde Gemeenten</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Bennie Kriekaard</div>
+            <div class="standhouder-type">Klavarskribo</div>
+          </div>
+          <div class="standhouder-item">
+            <div class="standhouder-naam">Matthijs Klein</div>
+            <div class="standhouder-type">Noteren van improvisaties</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRAKTISCH + TICKETS — 2 screens
+  ============================================================ -->
+  <section id="praktisch" class="section g2">
+    <div class="wrap">
+
+      <div class="group">
+        <div class="section-head">
+          <h2>Alles wat je moet weten</h2>
+        </div>
+        <div class="fill">
+          <div class="grid">
+
+            <div class="span-6">
+              <div class="info-rijen">
+                <div class="info-rij">
+                  <span class="info-label">Datum</span>
+                  <div class="info-waarde">Zaterdag 29 mei 2027</div>
+                </div>
+                <div class="info-rij">
+                  <span class="info-label">Tijden</span>
+                  <div class="info-waarde">
+                    Dagprogramma
+                    <small>Exacte tijden volgen</small>
+                  </div>
+                </div>
+                <div class="info-rij">
+                  <span class="info-label">Slotconcert</span>
+                  <div class="info-waarde">
+                    19:00 uur
+                    <small>Gert van Hoef (aparte tickets beschikbaar)</small>
+                  </div>
+                </div>
+                <div class="info-rij">
+                  <span class="info-label">Locatie</span>
+                  <div class="info-waarde">
+                    Grote of Sint-Janskerk
+                    <small>Korte Nieuwstraat 51, Schiedam</small>
+                  </div>
+                </div>
+                <div class="info-rij">
+                  <span class="info-label">Toegang</span>
+                  <div class="info-waarde">
+                    Dagticket € 12,50
+                    <small>Slotconcert € 7,50</small>
+                  </div>
+                </div>
+              </div>
+              <div class="locatie-blok">
+                <div class="locatie-naam">Grote of Sint-Janskerk</div>
+                <p class="locatie-adres">Korte Nieuwstraat 51<br>3111 XE Schiedam</p>
+                <p class="locatie-info">Goed bereikbaar met het openbaar vervoer. Parkeergarages aanwezig in de directe omgeving van het historisch centrum.</p>
+                <a href="https://www.openstreetmap.org/search?query=Grote+Sint+Janskerk+Schiedam" class="link" target="_blank" rel="noopener">Routebeschrijving</a>
+              </div>
+            </div>
+
+            <div class="span-6">
+              <div class="ticket-lijst">
+                <div class="ticket-soort">
+                  <div>
+                    <div class="ticket-naam">Dagticket</div>
+                    <div class="ticket-omschr">Toegang tot het volledige dagprogramma: lezingen, stands, mini-concerten en het slotconcert om 19:00 uur.</div>
+                  </div>
+                  <div class="ticket-prijs">€ 12,50</div>
+                </div>
+                <div class="ticket-soort">
+                  <div>
+                    <div class="ticket-naam">Slotconcert</div>
+                    <div class="ticket-omschr">Alleen het slotconcert van Gert van Hoef op zaterdagavond 29 mei om 19:00 uur.</div>
+                  </div>
+                  <div class="ticket-prijs">€ 7,50</div>
+                </div>
+              </div>
+              <p class="ticket-info">
+                Betaling via iDEAL, creditcard en meer. Je ontvangt direct een bevestiging per e-mail. Organisatie: <a href="https://koraalboek.nl" target="_blank" rel="noopener">KoraalBoek.nl</a>.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="group" id="aanmelden">
+        <div class="section-head">
+          <h2>Bestel je tickets</h2>
+        </div>
+        <div class="fill">
+          <div class="grid">
+
+            <div class="span-7">
+              <form action="/api/checkout" method="POST" novalidate="">
+                <div class="form-stack">
+                  <div class="field-row">
+                    <div class="field">
+                      <label for="voornaam">Voornaam</label>
+                      <input type="text" id="voornaam" name="voornaam" autocomplete="given-name" required="">
+                    </div>
+                    <div class="field">
+                      <label for="achternaam">Achternaam</label>
+                      <input type="text" id="achternaam" name="achternaam" autocomplete="family-name" required="">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="email">E-mailadres</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required="">
+                  </div>
+                  <div class="field-row">
+                    <div class="field">
+                      <label for="ticket_type">Type ticket</label>
+                      <select id="ticket_type" name="ticket_type">
+                        <option value="dag">Dagticket: € 12,50</option>
+                        <option value="concert">Slotconcert: € 7,50</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="aantal">Aantal personen</label>
+                      <select id="aantal" name="aantal">
+                        <option value="1">1 persoon</option>
+                        <option value="2">2 personen</option>
+                        <option value="3">3 personen</option>
+                        <option value="4">4 personen</option>
+                        <option value="5">5 personen</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn--primary" style="width: 100%; height: 52px; font-size: var(--t-body);">Bestel tickets</button>
+                </div>
+                <p class="form-noot">Je wordt doorgestuurd naar de beveiligde betaalpagina van Mollie. Betaling via iDEAL, creditcard en meer.</p>
+              </form>
+            </div>
+
+            <div class="span-5" style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: var(--s-5);">
+              <p style="font-size: var(--t-small); color: var(--muted); line-height: 1.65;">
+                Met Sietze de Vries, Minne Veldman en Gert van Hoef. Georganiseerd door <a href="https://koraalboek.nl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;">KoraalBoek.nl</a>.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER CLOSING — close-photo + dark
+============================================================ -->
+<footer class="closing footer--dark">
+  <img class="layer" src="./assets/kerk.jpg" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Slotconcert<br>29 mei 2027</h2>
+      <p>Gert van Hoef sluit OrgelEvent feestelijk af om 19:00 uur in de Grote of Sint-Janskerk, Schiedam.</p>
+    </div>
+    <div class="btn-row" style="margin-top: var(--s-6);">
+      <a class="btn btn--primary" href="#aanmelden">Bestel tickets</a>
+    </div>
+
+    <div class="footer__dir">
+      <div class="footer__logo-block">
+        <a class="nav__logo" href="#" style="font: 500 20px/1 var(--font-display); letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: var(--s-2); color: var(--p-inv-ink); text-decoration: none;">
+          <span class="mark" data-mark="ring" aria-hidden="true" style="background: var(--p-inv-ink);"></span>
+          OrgelEvent
+        </a>
+        <p style="font-size: var(--t-small); color: var(--p-inv-muted);">
+          Georganiseerd door <a href="https://koraalboek.nl" target="_blank" rel="noopener" style="color: var(--p-inv-muted); text-decoration: underline; text-underline-offset: 3px;">KoraalBoek.nl</a>
+        </p>
+      </div>
+      <nav class="footer__nav" aria-label="Footernavigatie">
+        <a href="#programma">Programma</a>
+        <a href="#musici">Musici</a>
+        <a href="#standhouders">Standhouders</a>
+        <a href="#praktisch">Praktisch</a>
+        <a href="#aanmelden">Tickets</a>
+      </nav>
+      <div class="footer__legal">
+        <span>© 2027 KoraalBoek.nl</span>
+        <a href="#">Privacy</a>
+        <a href="#">Voorwaarden</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="./assets/system.js"></script>
+<script type="module" src="./assets/layout/layout.js"></script>
+<script>
+  /* nav toggle — fallback for the system.js module */
+  (function () {
+    var nav = document.querySelector('.nav');
+    var toggle = nav && nav.querySelector('.nav__toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('nav-locked', open);
+    });
+    nav.querySelectorAll('a[href]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-locked');
+      });
+    });
+  }());
+</script>
+
+
+
+</body></html>

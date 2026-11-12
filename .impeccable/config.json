@@ -29,6 +29,18 @@
         ],
         "createdAt": "2026-11-12T09:46:03.696Z",
         "reason": "Warm Parchment (#FDFAF4) and Nave Cream (#F4ECD6) are OrgelEvent's core palette, explicitly documented in DESIGN.md as borrowed from Dutch church interior materials (aged parchment, nave stone). Not a reflexive choice."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "newsreader",
+        "createdAt": "2026-11-12T10:16:37.287Z",
+        "reason": "taste-skill brand command output: Newsreader selected as display face for trusted/refined service register (parent session design decision)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "hanken grotesk",
+        "createdAt": "2026-11-12T10:16:40.031Z",
+        "reason": "taste-skill brand command output: Hanken Grotesk selected as text face paired with Newsreader (parent session design decision)"
       }
     ]
   }
