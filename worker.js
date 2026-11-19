@@ -21,7 +21,17 @@ export default {
       return handleWebhook(request, env);
     }
 
-    return env.ASSETS.fetch(request);
+    // Coming soon: toon aankondiging tot 1 december 2026
+    const GO_LIVE = new Date('2026-12-01T00:00:00+01:00');
+    const now = new Date();
+    if (now < GO_LIVE && !url.pathname.includes('.')) {
+      return comingSoonPage();
+    }
+
+    const assetRes = await env.ASSETS.fetch(request);
+    const headers = new Headers(assetRes.headers);
+    headers.set('Cache-Control', 'no-store');
+    return new Response(assetRes.body, { status: assetRes.status, headers });
   },
 };
 
@@ -193,5 +203,169 @@ function errorPage(message) {
   return new Response(html, {
     status: 400,
     headers: { 'Content-Type': 'text/html;charset=UTF-8' },
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Coming soon: getoond tot 1 december 2026
+// ---------------------------------------------------------------------------
+function comingSoonPage() {
+  const html = `<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrgelEvent — 29 mei 2027, Schiedam</title>
+  <meta name="description" content="OrgelEvent: een dag orgelmuziek, lezingen en ontmoetingen in de Grote of Sint-Janskerk, Schiedam. Zaterdag 29 mei 2027." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Jost', system-ui, sans-serif;
+      background: #0C1912;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('/assets/kerk.jpg') center 20% / cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        170deg,
+        rgba(8,15,12,0.60) 0%,
+        rgba(8,15,12,0.15) 30%,
+        rgba(8,15,12,0.55) 65%,
+        rgba(8,15,12,0.97) 90%,
+        rgba(8,15,12,1.00) 100%
+      );
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 0 64px 80px;
+      max-width: 1160px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 48px;
+    }
+    .datum-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #C8963C;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(72px, 10vw, 140px);
+      font-weight: 500;
+      line-height: 0.88;
+      color: #fff;
+      margin-bottom: 48px;
+    }
+    h1 span { display: block; }
+    h1 .italic { font-style: italic; font-weight: 400; }
+    h1 .year { font-style: italic; font-weight: 400; color: #C8963C; font-size: 0.6em; }
+    .aankondiging {
+      border-left: 2px solid #C8963C;
+      padding-left: 24px;
+      max-width: 520px;
+    }
+    .aankondiging-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C8963C;
+      margin-bottom: 10px;
+    }
+    .aankondiging-tekst {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 500;
+      line-height: 1.25;
+      color: rgba(255,255,255,0.90);
+      margin-bottom: 10px;
+    }
+    .aankondiging-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+    footer {
+      background: #07110D;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 64px;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+    }
+    @media (max-width: 768px) {
+      .content { padding: 0 24px 60px; }
+      footer { padding: 20px 24px; }
+      h1 { font-size: 72px; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="content">
+      <div class="logo">OrgelEvent</div>
+      <p class="datum-badge">Zaterdag 29 mei 2027 &mdash; Schiedam</p>
+      <h1>
+        <span>Orgel</span>
+        <span class="italic">Event</span>
+        <span class="year">2027</span>
+      </h1>
+      <div class="aankondiging">
+        <div class="aankondiging-label">Binnenkort online</div>
+        <div class="aankondiging-tekst">De website gaat online op 1&nbsp;december 2026</div>
+        <p class="aankondiging-sub">Een dag orgelmuziek, lezingen en ontmoetingen in de Grote of Sint-Janskerk, Schiedam. Met Sietze de Vries, Minne Veldman en Gert van Hoef.</p>
+      </div>
+    </div>
+  </main>
+  <footer>OrgelEvent 2027 &mdash; Georganiseerd door KoraalBoek.nl</footer>
+</body>
+</html>`;
+  return new Response(html, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html;charset=UTF-8',
+      'Cache-Control': 'no-store',
+    },
   });
 }
